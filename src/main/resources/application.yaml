@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: mpesa
+mpesa:
+  daraja:
+    base-url: https://sandbox.safaricom.co.ke
+    stk-push-callback-url: https://alexguandaru.dev
+    consumer-key: ${CONSUMER-KEY}
+    consumer-secret: ${CONSUMER-SECRET}
+    passkey: ${PASSKEY}
+    business-shortcode: ${BUSINESS-CODE}
+server:
+  port: 8082
