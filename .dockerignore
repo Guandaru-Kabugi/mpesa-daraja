@@ -1,0 +1,8 @@
+.env
+.git
+.idea
+target
+postman
+requests.http
+HELP.md
+*.iml

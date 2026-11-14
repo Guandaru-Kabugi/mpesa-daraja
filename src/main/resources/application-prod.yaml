@@ -1,0 +1,4 @@
+server:
+  # Nginx sits in front and passes the real client IP and protocol in
+  # X-Forwarded-* headers. This tells Spring to trust them.
+  forward-headers-strategy: framework
