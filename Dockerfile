@@ -13,7 +13,8 @@ COPY pom.xml .
 RUN mvn -B -q dependency:go-offline
 
 COPY src/ src/
-# Tests need a database, which doesn't exist at build time, so skip them here
+# The test starts the whole app, which needs the Daraja keys from .env. Those
+# aren't (and shouldn't be) available while building the image, so skip tests here.
 RUN mvn -B -q -DskipTests package
 
 # ---------- Stage 2: run ----------

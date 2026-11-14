@@ -1,9 +1,26 @@
+# Runs the M-Pesa API:  docker compose up -d --build
+# Values like ${CONSUMER_KEY} come from the .env file next to this one
+# (copy .env.example to .env on the server and fill it in).
+#
+# No database yet: payment results are kept in memory, so a restart forgets payments
+# that were still waiting for Safaricom's callback.
+
 services:
   api:
     build: .
     restart: unless-stopped
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      # The :? makes `docker compose up` stop with an error if a value is missing,
+      # instead of the app crashing on startup with an unresolved placeholder.
+      CONSUMER_KEY: ${CONSUMER_KEY:?Set CONSUMER_KEY in .env}
+      CONSUMER_SECRET: ${CONSUMER_SECRET:?Set CONSUMER_SECRET in .env}
+      PASSKEY: ${PASSKEY:?Set PASSKEY in .env}
+      BUSINESS_SHORTCODE: ${BUSINESS_SHORTCODE:?Set BUSINESS_SHORTCODE in .env}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:?Set PUBLIC_BASE_URL in .env}
+    # Java sizes its heap as 75% of this (MaxRAMPercentage in the Dockerfile). Without a limit
+    # it would take 75% of the whole server's RAM, and so would the personal website's API.
+    mem_limit: 384m
     ports:
       # 127.0.0.1 = reachable only from the server itself (Nginx, SSH tunnels).
       # Writing just "8082:8082" would publish it to the whole internet, and

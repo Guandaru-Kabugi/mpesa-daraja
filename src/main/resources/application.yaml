@@ -5,11 +5,11 @@ mpesa:
   daraja:
     base-url: https://sandbox.safaricom.co.ke
     # Where Safaricom POSTs the payment result. It must be public HTTPS, so while developing
-    # set PUBLIC-BASE-URL to your ngrok address (e.g. https://ab12-cd34.ngrok-free.app).
-    stk-push-callback-url: ${PUBLIC-BASE-URL:https://alexguandaru.dev}/api/payments/callback
-    consumer-key: ${CONSUMER-KEY}
-    consumer-secret: ${CONSUMER-SECRET}
+    # set PUBLIC_BASE_URL to your ngrok address (e.g. https://ab12-cd34.ngrok-free.app).
+    stk-push-callback-url: ${PUBLIC_BASE_URL:https://alexguandaru.dev}/api/payments/callback
+    consumer-key: ${CONSUMER_KEY}
+    consumer-secret: ${CONSUMER_SECRET}
     passkey: ${PASSKEY}
-    business-shortcode: ${BUSINESS-CODE}
+    business-shortcode: ${BUSINESS_SHORTCODE}
 server:
   port: 8082
